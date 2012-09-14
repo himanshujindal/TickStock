@@ -1,0 +1,9 @@
+# To generate the key (1 time)
+keytool -genkey -v -keystore android-release-key.keystore -alias android -keyalg RSA -validity 10000
+
+
+#To sign the apk
+jarsigner -verbose -keystore android-release-key.keystore androidstockquo-1.4.apk android
+
+# To verify(optional)
+jarsigner -verify androidstockquo-1.4.apk

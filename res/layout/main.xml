@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	  <TabHost android:id="@+id/tabhost"  
+         android:layout_width="fill_parent"  
+         android:layout_height="fill_parent">  
+         <TabWidget android:id="@android:id/tabs"  
+             android:layout_width="fill_parent"  
+             android:layout_height="wrap_content"  
+         />  
+		<FrameLayout android:id="@android:id/tabcontent"
+			android:layout_width="fill_parent" android:layout_height="fill_parent">
+			<LinearLayout android:id="@+id/rlGetQuote"
+				android:orientation="vertical" android:layout_width="fill_parent"
+				android:layout_height="wrap_content">
+				<RelativeLayout android:id="@+id/rl"
+					android:orientation="vertical" android:layout_width="fill_parent"
+					android:layout_height="wrap_content" android:padding="5dp"
+					android:layout_marginTop="80dp">
+					<AutoCompleteTextView android:id="@+id/symbol"
+						android:layout_width="80dp" android:layout_height="35dp"
+						android:textSize="12dp" android:completionThreshold="1" 
+						android:capitalize="characters" android:singleLine="true"/>
+
+					<RadioGroup
+					    android:id="@+id/ChartRadio"
+					    android:layout_width="wrap_content"
+					    android:layout_height="wrap_content"
+					    android:layout_alignParentRight="true"
+					    android:layout_alignParentTop="true"
+					    android:paddingLeft="3dp"
+					    android:layout_toRightOf="@+id/chartImageView" >
+					    
+						
+					    <RadioButton
+					        android:id="@+id/DailyRadio"
+					        android:layout_width="wrap_content"
+					        android:layout_height="wrap_content"
+					        android:checked="true"
+					        android:text="Daily" />
+					    
+					    <RadioButton
+					        android:id="@+id/WeeklyRadio"
+					        android:layout_width="wrap_content"
+					        android:layout_height="wrap_content"
+					        android:text="Weekly" />
+
+					    <RadioButton
+					        android:id="@+id/YearlyRadio"
+					        android:layout_width="wrap_content"
+					        android:layout_height="wrap_content"
+					        android:text="Yearly" />
+					</RadioGroup>
+
+					<ImageView
+					    android:id="@+id/chartImageView"
+					    android:layout_width="180dp"
+					    android:layout_height="100dp"
+					    android:layout_alignParentLeft="true"
+					    android:layout_alignRight="@+id/SubmitSymbols"
+					    android:layout_below="@+id/symbol"
+					    android:background="#FFFFFF"
+					    android:padding="5dp" />
+
+					<Button
+					    android:id="@+id/SubmitSymbols"
+					    android:layout_width="100dp"
+					    android:layout_height="35dp"
+					    android:layout_above="@+id/chartImageView"
+					    android:layout_centerHorizontal="true"
+					    android:text="Get Quote"
+					    android:textSize="14dp" />
+
+					<ImageView
+					    android:id="@+id/loadingImageView"
+					    android:layout_width="25dp"
+					    android:layout_height="25dp"
+					    android:layout_alignBottom="@+id/SubmitSymbols"
+					    android:layout_toLeftOf="@+id/SubmitSymbols"
+					    android:paddingLeft="5dp" />
+
+				</RelativeLayout>
+				
+				<RelativeLayout android:id="@+id/rlgetQuoteError"
+					android:orientation="vertical" android:layout_width="fill_parent"
+					android:layout_height="wrap_content" android:padding="5dp" android:visibility="gone">
+					<TextView android:id="@+id/getQuoteErrorText"
+						android:layout_width="250dp" android:layout_height="wrap_content"
+						android:textSize="12dp" android:textColor="#FF0000"/>
+					<Button android:id="@+id/getQuoteErrorClose"
+						android:layout_width="100dp" android:layout_height="35dp"
+						android:text="Close" android:layout_toRightOf="@id/getQuoteErrorText"
+						android:textSize="12dp" android:textColor="#FF0000"/>
+				</RelativeLayout>
+				<RelativeLayout android:id="@+id/rlChart"
+					android:orientation="vertical" android:layout_width="fill_parent"
+					android:layout_height="wrap_content">
+
+				</RelativeLayout>
+					<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:gravity="center_horizontal" android:scrollbars="vertical|horizontal"> 
+						<TableLayout android:id="@+id/getQuoteTable" 
+         				android:layout_width="fill_parent"  
+         				android:layout_height="wrap_content"
+         				android:scrollbars = "vertical" >
+							<TableRow  
+         					android:layout_width="fill_parent"  
+         					android:layout_height="wrap_content"
+         					android:background="#333333">
+								<TextView android:text="Symbol: "
+         						android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="5dp" />
+								<TextView android:id="@+id/stockSymbolValue"	 
+								android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold"/>
+							</TableRow>
+							<TableRow  
+	         				android:layout_width="fill_parent"  
+	         				android:layout_height="wrap_content"
+	       					android:background="#444444">
+							<TextView android:text="Name: "
+         					android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="5dp" />
+							<TextView android:id="@+id/stockNameValue"	
+							android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold"/>
+							</TableRow>
+							<TableRow  
+         					android:layout_width="fill_parent"  
+         					android:layout_height="wrap_content"
+       						android:background="#333333">
+								<TextView android:text="LTP: "
+         						android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="5dp" />
+								<TextView android:id="@+id/lastTradedValue"	
+								android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold" android:textColor="#FFFF00" />
+							</TableRow>
+							<TableRow  
+         					android:layout_width="fill_parent"  
+         					android:layout_height="wrap_content"
+         					android:background="#444444">
+								<TextView android:text="Change: " android:id="@+id/changeLabel"
+         						android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="5dp" />
+								<RelativeLayout android:id="@+id/rl2"
+								android:orientation="vertical" android:layout_width="fill_parent"
+								android:layout_height="wrap_content">
+									<ImageView android:id="@+id/changeImage1"
+									android:layout_width="wrap_content" android:layout_height="wrap_content"
+									android:layout_alignBottom="@id/changeLabel"
+									android:paddingBottom="3dp" />
+									<TextView android:id="@+id/changeValue_abs"
+									android:layout_width="wrap_content" android:layout_height="wrap_content"
+									android:layout_toRightOf="@id/changeImage1"
+									android:layout_marginLeft="2dp" />
+								</RelativeLayout>
+							</TableRow>
+							<TableRow  
+         					android:layout_width="fill_parent"  
+         					android:layout_height="wrap_content"
+         					android:background="#333333">
+								<TextView android:text="Volume: "
+         						android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="5dp" />
+								<TextView android:id="@+id/volumeValue"	
+								android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold" />
+							</TableRow>
+							<TableRow  
+         					android:layout_width="fill_parent"  
+         					android:layout_height="wrap_content"
+         					android:background="#444444">
+								<TextView android:text="Market Cap: "
+         						android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="5dp" />
+								<TextView android:id="@+id/marketCapValue"	
+								android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold" />
+							</TableRow>
+							<TableRow  
+         					android:layout_width="fill_parent"  
+         					android:layout_height="wrap_content"
+         					android:background="#333333">
+								<TextView android:text="EPS: "
+         						android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="5dp" />
+								<TextView android:id="@+id/epsValue"	
+								android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold" />
+							</TableRow>
+							<TableRow  
+         					android:layout_width="fill_parent"  
+         					android:layout_height="wrap_content"
+         					android:background="#444444">
+								<TextView android:text="EPS Estimate Curr_Quarter: "
+         						android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="5dp" />
+								<TextView android:id="@+id/eps_currValue"	
+								android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold" />
+							</TableRow>
+							<TableRow  
+         					android:layout_width="fill_parent"  
+         					android:layout_height="wrap_content"
+         					android:background="#333333">
+								<TextView android:text="EPS Estimate Next_Quarter: "
+         						android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="5dp" />
+								<TextView android:id="@+id/eps_nxtValue"	
+								android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold" />
+							</TableRow>
+							<TableRow  
+         					android:layout_width="fill_parent"  
+         					android:layout_height="wrap_content"
+         					android:background="#444444">
+								<TextView android:text="1 Yr Target Price: "
+         						android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="5dp" />
+								<TextView android:id="@+id/targetPriceValue"	
+								android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold" />
+							</TableRow>
+							<TableRow  
+		         			android:layout_width="fill_parent"  
+		         			android:layout_height="wrap_content"
+         					android:background="#333333">
+								<TextView android:text="P/E Ratio: "
+	         					android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="5dp" />
+								<TextView android:id="@+id/peRatioValue"	
+								android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold" />
+							</TableRow>
+							<TableRow  
+         					android:layout_width="fill_parent"  
+         					android:layout_height="wrap_content"
+         					android:background="#444444">
+								<TextView android:text="PEG Ratio "
+         						android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="5dp" />
+								<TextView android:id="@+id/pegRatioValue"	
+								android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold" />
+							</TableRow>
+							<TableRow  
+         					android:layout_width="fill_parent"  
+         					android:layout_height="wrap_content"
+         					android:background="#333333">
+								<TextView android:text="EBITDA: "
+         						android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="5dp" />
+								<TextView android:id="@+id/ebitdaValue"	
+								android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold" />
+							</TableRow>
+							<TableRow  
+         					android:layout_width="fill_parent"  
+         					android:layout_height="wrap_content"
+         					android:background="#444444">
+								<TextView android:text="Market Sentiment: "
+         						android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="5dp" />
+								<TextView android:id="@+id/marketSentiValue"	
+								android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold" />
+							</TableRow>
+							<TableRow  
+         					android:layout_width="fill_parent"  
+         					android:layout_height="wrap_content"
+         					android:background="#333333">
+								<TextView android:text="Volatility (Black Scholes): "
+         						android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingLeft="5dp" />
+								<TextView android:id="@+id/volatilityValue"	
+								android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold" />
+							</TableRow>
+						</TableLayout>
+				</ScrollView>
+			</LinearLayout>
+			<LinearLayout android:id="@+id/rlFavQuote"
+				android:orientation="vertical" android:layout_width="fill_parent"
+				android:layout_height="wrap_content">
+
+				<RelativeLayout android:id="@+id/rlMyPortfolio"
+					android:orientation="vertical" android:layout_width="fill_parent"
+					android:layout_height="wrap_content" android:padding="5dp"
+					android:layout_marginTop="80dp">
+					<AutoCompleteTextView android:id="@+id/myPortfolioSymbol"
+						android:layout_width="80dp" android:layout_height="35dp"
+						android:textSize="12dp" android:completionThreshold="1" 
+						android:capitalize="characters" android:singleLine="true" />
+
+					<Button android:id="@+id/myPortfolioSubmitSymbol"
+						android:layout_width="100dp" android:layout_height="35dp"
+						android:text="Add Symbol" android:layout_toRightOf="@id/myPortfolioSymbol"
+						android:textSize="14dp" />
+
+					<Button android:id="@+id/myPortfolioRefreshPortfolio"
+						android:layout_width="100dp" android:layout_height="35dp"
+						android:text="Refresh" android:layout_toRightOf="@id/myPortfolioSubmitSymbol"
+						android:textSize="14dp" />
+
+					<ImageView android:id="@+id/myPortfolioLoadingImageView"
+						android:layout_width="25dp" android:layout_height="25dp"
+						android:layout_toRightOf="@+id/myPortfolioRefreshPortfolio"
+						android:layout_marginLeft="5dp" android:layout_alignRight="@id/rlMyPortfolio" />
+				</RelativeLayout>
+				<RelativeLayout android:id="@+id/rlAddSymbolError"
+					android:orientation="vertical" android:layout_width="fill_parent"
+					android:layout_height="wrap_content" android:padding="5dp" android:visibility="gone">
+					<TextView android:id="@+id/addSymbolErrorText"
+						android:layout_width="250dp" android:layout_height="wrap_content"
+						android:textSize="12dp" android:textColor="#FF0000"/>
+					<Button android:id="@+id/addSymbolErrorClose"
+						android:layout_width="100dp" android:layout_height="35dp"
+						android:text="Close" android:layout_toRightOf="@id/addSymbolErrorText"
+						android:textSize="12dp" android:textColor="#FF0000"/>
+				</RelativeLayout>
+					<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:gravity="center_horizontal" android:scrollbars="vertical|horizontal">
+						<LinearLayout android:id="@+id/rlLastUpdated"
+							android:orientation="vertical" android:layout_width="fill_parent"
+							android:layout_height="wrap_content" android:gravity="bottom" 
+				         	android:scrollbars = "vertical|horizontal"> 
+								<TableLayout android:id="@+id/myPortfolioTable" 
+				         			android:layout_width="fill_parent"  
+				         			android:layout_height="wrap_content">
+									<TableRow  android:id="@+id/myPortfolioHeaderRow"
+				         			android:layout_width="fill_parent"  
+				         			android:layout_height="wrap_content"
+				         			android:background="#666666">
+										<TextView android:id="@+id/myPortfolioSymbolHeader"	android:paddingLeft="2dp" android:text="Symbol"
+										    android:paddingRight="2dp" android:paddingTop="5dp" android:paddingBottom="5dp"
+				         					android:layout_width="fill_parent" android:layout_height="wrap_content" android:textStyle="bold"/>
+										<TextView android:id="@+id/myPortfolioLTPHeader"	android:padding="2dp" android:text="Price"
+				         					android:paddingRight="2dp" android:paddingTop="5dp" android:paddingBottom="5dp"
+				         					android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold"/>
+										<TextView android:id="@+id/myPortfolioUpDownHeader"	android:paddingLeft="2dp" android:text=""
+				         					android:paddingRight="0dp" android:paddingTop="5dp" android:paddingBottom="5dp"
+				         					android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold"/>
+										<TextView android:id="@+id/myPortfolioChangeHeader"	android:paddingLeft="0dp" android:text="Change"
+										    android:paddingRight="2dp" android:paddingTop="5dp" android:paddingBottom="5dp"
+				         					android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold"/>
+				         				<TextView android:id="@+id/myPortfolioSentiment"	android:paddingLeft="2dp" android:text="Outlook"
+										    android:paddingRight="2dp" android:paddingTop="5dp" android:paddingBottom="5dp"
+				         					android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold"/>
+				         				
+				         				<TextView android:id="@+id/myPortfolioChangeHeader"	android:paddingLeft="2dp" android:text="Volatility"
+										    android:paddingRight="2dp" android:paddingTop="5dp" android:paddingBottom="5dp"
+				         					android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold"/>
+				         				
+										<TextView android:id="@+id/myPortfolioRemoveHeader"	android:paddingLeft="2dp" android:text="Remove"
+										    android:paddingRight="2dp" android:paddingTop="5dp" android:paddingBottom="5dp"
+				         					android:layout_width="fill_parent"  android:layout_height="wrap_content" android:textStyle="bold"/>
+									</TableRow>
+								</TableLayout>
+								<TextView android:id="@+id/netvolatility"
+									android:layout_height="wrap_content" android:layout_width="wrap_content"
+									android:textSize="13dp" android:textStyle="bold"/>
+								<TextView android:id="@+id/screenRefreshTimeValue"
+									android:layout_height="wrap_content" android:layout_width="wrap_content"
+									android:textSize="10dp"/>
+						</LinearLayout>
+				</ScrollView>
+			</LinearLayout>
+		</FrameLayout>
+	</TabHost>
+</LinearLayout>
